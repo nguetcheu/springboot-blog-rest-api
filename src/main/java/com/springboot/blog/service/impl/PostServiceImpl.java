@@ -6,6 +6,8 @@ import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.PostService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostServiceImpl implements PostService {
 
@@ -27,12 +29,23 @@ public class PostServiceImpl implements PostService {
         Post newPost = postRepository.save(post);
 
         // Convert entity to DTO
-        PostDto postResponse = new PostDto();
-        postResponse.setId(newPost.getId());
-        postResponse.setTitle(newPost.getTitle());
-        postResponse.setDescription(newPost.getDescription());
-        postResponse.setContent(newPost.getContent());
+        PostDto postResponse = mapToDTo(newPost);
 
         return postResponse;
+    }
+
+    @Override
+    public List<PostDto> getAllPosts() {
+        return  null;
+    }
+
+    // Convert entity to DTO
+    private PostDto mapToDTo(Post post){
+        PostDto postDto = new PostDto();
+        postDto.setId(post.getId());
+        postDto.setTitle(post.getTitle());
+        postDto.setDescription(post.getDescription());
+        postDto.setContent(post.getContent());
+        return postDto;
     }
 }
