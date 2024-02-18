@@ -40,8 +40,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDto getPostById(Long id) {
         Post post = postRepository.findById(id).orElseThrow( () -> new ResourceNotFoundException("Post", "id", id));
-        PostDto postDto = mapToDTo(post);
-        return postDto;
+        return mapToDTo(post);
     }
 
     // Convert entity to DTO
