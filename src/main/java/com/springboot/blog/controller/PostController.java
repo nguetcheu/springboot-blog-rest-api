@@ -1,6 +1,7 @@
 package com.springboot.blog.controller;
 
 import com.springboot.blog.dtos.PostDto;
+import com.springboot.blog.entity.Post;
 import com.springboot.blog.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,12 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> getPostsById(@PathVariable("id") Long postId){
         return ResponseEntity.ok(postService.getPostById(postId));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PostDto> updatePostById(@RequestBody PostDto postDto, @PathVariable("id") Long postId){
+        PostDto postResponse = postService.updatePost(postDto, postId);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
     }
 
     // create the post
