@@ -21,8 +21,11 @@ public class PostController {
 
     @GetMapping
     public PostResponse getAllPosts(
+            // paramétre de trie avec api obtention de post
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+
     ){
         return postService.getAllPosts(pageNo, pageSize);
     }
