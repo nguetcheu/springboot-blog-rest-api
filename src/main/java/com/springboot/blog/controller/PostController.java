@@ -21,13 +21,14 @@ public class PostController {
 
     @GetMapping
     public PostResponse getAllPosts(
-            // paramétre de trie avec api obtention de post http://localhost:9000/api/posts?sortBy=title?pageSize=5?pageNo?=1
+            // paramétre de trie avec api obtention de post http://localhost:9000/api/posts?sortBy=title&pageSize=10&pageNo?=0&sortDir=asc
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
-            @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy
+            @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir
 
     ){
-        return postService.getAllPosts(pageNo, pageSize, sortBy);
+        return postService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
     }
 
     @GetMapping("/{id}")
