@@ -54,7 +54,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDto getCommentById(Long postId, Long commentId) {
 
-        // retrieve Post entity from id
+        // retrieve Post entity by id
         Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("post", "1", postId));
 
         // retrieve comment by id;
@@ -65,6 +65,14 @@ public class CommentServiceImpl implements CommentService {
         }
 
         return mapToDTo(comment);
+    }
+
+    @Override
+    public CommentDto updateComment(Long postId, Long commentId, CommentDto commentRequest) {
+        // retrieve Post entity by id
+        Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("post", "1", postId));
+
+
     }
 
 
