@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     }
     // global exceptions
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorDetails> handleException(BlogAPIException exception,
+    public ResponseEntity<ErrorDetails> handleException(Exception exception,
                                                                WebRequest webRequest){
         ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage()
                 , webRequest.getDescription(false));
