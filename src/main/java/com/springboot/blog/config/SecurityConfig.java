@@ -11,13 +11,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        httpSecurity.csrf()
+        http.csrf()
                 .disable()
                 .authorizeHttpRequests( (authorize) ->  authorize.anyRequest().authenticated()
                 ).httpBasic(Customizer.withDefaults());
 
-        return httpSecurity.build();
+        return http.build();
     }
 }
