@@ -51,7 +51,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers,
                                                                   HttpStatusCode status,
                                                                   WebRequest request) {
-
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) ->{
             String fieldName = ((FieldError)error).getField();
@@ -59,6 +58,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             errors.put(fieldName, message);
         });
 
-        return super.handleMethodArgumentNotValid(ex, headers, status, request);
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
