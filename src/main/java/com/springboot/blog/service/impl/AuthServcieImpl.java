@@ -1,6 +1,7 @@
 package com.springboot.blog.service.impl;
 
 import com.springboot.blog.dtos.LoginDto;
+import com.springboot.blog.dtos.RegisterDto;
 import com.springboot.blog.service.AuthService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,5 +27,10 @@ public class AuthServcieImpl implements AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
          return "User Logged successfully!.";
+    }
+
+    @Override
+    public String register(RegisterDto registerDto) {
+        return null;
     }
 }
