@@ -2,6 +2,8 @@ package com.springboot.blog.service.impl;
 
 import com.springboot.blog.dtos.LoginDto;
 import com.springboot.blog.dtos.RegisterDto;
+import com.springboot.blog.entity.Role;
+import com.springboot.blog.entity.User;
 import com.springboot.blog.exception.BlogAPIException;
 import com.springboot.blog.repository.RoleRepository;
 import com.springboot.blog.repository.UserRepository;
@@ -13,6 +15,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class AuthServcieImpl implements AuthService {
@@ -53,7 +58,19 @@ public class AuthServcieImpl implements AuthService {
             throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Email is already exists!");
         }
 
+        User user = new User();
+        user.setName(registerDto.getName());
+        user.setUserName(registerDto.getUsername());
+        user.setEmail(registerDto.getEmail());
+        user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
-        return null;
+        Set<Role> roles = new HashSet<>();
+        Role userRole = roleRepository.findByName("ROLE_USER").get();
+        roles.add(userRole);
+        user.setRoles(roles);
+
+        userRepository.save(user);
+
+        return "User registered successfully";
     }
 }
