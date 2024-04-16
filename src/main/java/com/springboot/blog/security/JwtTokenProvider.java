@@ -40,14 +40,14 @@ public class JwtTokenProvider {
 
     }
 
-    private Key key(){
+    public Key key(){
         return Keys.hmacShaKeyFor(
                 Decoders.BASE64.decode(jwtSecret)
         );
     }
 
     // get username from Jwt token
-    private String getUsername(String token){
+    public String getUsername(String token){
         Claims claims = Jwts.parser()
                 .setSigningKey(key())
                 .build()
