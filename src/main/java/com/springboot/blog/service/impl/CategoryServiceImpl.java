@@ -2,10 +2,13 @@ package com.springboot.blog.service.impl;
 
 import com.springboot.blog.dtos.CategoryDto;
 import com.springboot.blog.entity.Category;
+import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -25,6 +28,13 @@ public class CategoryServiceImpl implements CategoryService {
         Category saveCategory = categoryRepository.save(category);
         return mapToDTo(saveCategory);
     }
+
+    @Override
+    public CategoryDto getCategoryById(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+        return mapToDTo(category);
+    }
+
 
     // Convert entity to DTO
     private CategoryDto mapToDTo(Category category){
