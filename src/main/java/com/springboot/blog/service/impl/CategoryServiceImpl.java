@@ -1,13 +1,13 @@
 package com.springboot.blog.service.impl;
 
 import com.springboot.blog.dtos.CategoryDto;
-import com.springboot.blog.dtos.PostDto;
 import com.springboot.blog.entity.Category;
-import com.springboot.blog.entity.Post;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.service.CategoryService;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
